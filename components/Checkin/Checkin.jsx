@@ -1,7 +1,51 @@
-import { View, Text, Image } from "react-native";
-import React from "react";
+import { View, Text, Image, TouchableOpacity } from "react-native";
+import React, { useEffect, useState } from "react";
 
-const Checkin = () => {
+const Checkin = ({navigation}) => {
+  const [currentTime, setCurrentTime] = useState("");
+  const [currentDate, setCurrentDate] = useState("");
+
+  useEffect(() => {
+    const now = new Date();
+
+    const hours = String(now.getHours());
+    const minutes = String(now.getMinutes());
+    const formattedTime = `${hours}:${minutes}`;
+
+    const daysOfWeek = [
+      "Minggu",
+      "Senin",
+      "Selasa",
+      "Rabu",
+      "Kamis",
+      "Jumat",
+      "Sabtu",
+    ];
+    const monthsOfYear = [
+      "Januari",
+      "Februari",
+      "Maret",
+      "April",
+      "Mei",
+      "Juni",
+      "Juli",
+      "Agustus",
+      "September",
+      "Oktober",
+      "November",
+      "Desember",
+    ];
+
+    const dayOfWeek = daysOfWeek[now.getDay()];
+    const day = now.getDate();
+    const month = monthsOfYear[now.getMonth()];
+    const year = now.getFullYear();
+    const formattedDate = `${dayOfWeek}, ${day} ${month} ${year}`;
+
+    setCurrentTime(formattedTime);
+    setCurrentDate(formattedDate);
+  }, []);
+
   return (
     <View
       style={{
@@ -20,7 +64,14 @@ const Checkin = () => {
           Welcome!
         </Text>
       </View>
-      <View style={{ width:'100%', paddingHorizontal: 30, gap: 20, alignItems: 'center' }}>
+      <View
+        style={{
+          width: "100%",
+          paddingHorizontal: 30,
+          gap: 20,
+          alignItems: "center",
+        }}
+      >
         <View
           style={{
             borderWidth: 1,
@@ -47,10 +98,31 @@ const Checkin = () => {
             Febri Damatraseta Fairuz S.T, M.Kom
           </Text>
         </View>
-        <View style={{ alignItems: 'center' }}>
-            <Text style={{ fontSize: 20 }}>Jam kehadiran: 19.00</Text>
-            <Text>Sabtu, 15 Juni 2024</Text>
+        <View style={{ alignItems: "center" }}>
+          <Text style={{ fontSize: 20 }}>Jam kehadiran: {currentTime}</Text>
+          <Text>{currentDate}</Text>
         </View>
+      </View>
+      <View>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("Logout")}
+        style={{
+          backgroundColor: "#D9D9D9",
+          paddingHorizontal: 40,
+          paddingVertical: 15,
+          borderRadius: 20,
+        }}
+      >
+        <Text
+          style={{
+            fontWeight: 600,
+            fontSize: 15,
+            textAlign: "center",
+          }}
+        >
+          Next
+        </Text>
+      </TouchableOpacity>
       </View>
     </View>
   );

@@ -1,15 +1,12 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import HomeIcon from "../../assets/icons/home.png";
 import ProfileIcon from "../../assets/icons/profile.png";
 import OutIcon from "../../assets/icons/out.png";
 import ScanIcon from "../../assets/icons/scan.png";
-import Login from "../Login/Login";
 import Profile from "../Profile/Profile";
-import Scan from "../Scan/Scan";
 import Logout from "../Logout/Logout";
-import Home from "../Home/Home";
+import Tap from "../Scan/Tap";
 
 
 const Navigasi = () => {
@@ -32,31 +29,6 @@ const Navigasi = () => {
         ],
       }}
     >
-      <Tab.Screen
-        name="Home"
-        component={Home}
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <View
-              style={{
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Image
-                source={HomeIcon}
-                resizeMode="contain"
-                style={{
-                  width: 25,
-                  height: 25,
-                  tintColor: focused ? "black" : "grey",
-                }}
-              />
-            </View>
-          ),
-        }}
-      />
       <Tab.Screen
         name="Profile"
         component={Profile}
@@ -84,7 +56,7 @@ const Navigasi = () => {
       />
       <Tab.Screen
         name="Scanner"
-        component={Scan}
+        component={Tap}
         options={{
           tabBarIcon: ({ focused }) => (
             <View
