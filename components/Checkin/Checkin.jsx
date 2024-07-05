@@ -1,7 +1,7 @@
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import React, { useEffect, useState } from "react";
 
-const Checkin = ({navigation}) => {
+const Checkin = ({ navigation, route }) => {
   const [currentTime, setCurrentTime] = useState("");
   const [currentDate, setCurrentDate] = useState("");
 
@@ -45,6 +45,11 @@ const Checkin = ({navigation}) => {
     setCurrentTime(formattedTime);
     setCurrentDate(formattedDate);
   }, []);
+
+  const handleNextPress = () => {
+    route.params.setScanned(false);
+    navigation.navigate("Tap");
+  };
 
   return (
     <View
@@ -104,25 +109,25 @@ const Checkin = ({navigation}) => {
         </View>
       </View>
       <View>
-      <TouchableOpacity
-        onPress={() => navigation.navigate("Logout")}
-        style={{
-          backgroundColor: "#D9D9D9",
-          paddingHorizontal: 40,
-          paddingVertical: 15,
-          borderRadius: 20,
-        }}
-      >
-        <Text
+        <TouchableOpacity
+          onPress={handleNextPress}
           style={{
-            fontWeight: 600,
-            fontSize: 15,
-            textAlign: "center",
+            backgroundColor: "#D9D9D9",
+            paddingHorizontal: 40,
+            paddingVertical: 15,
+            borderRadius: 20,
           }}
         >
-          Next
-        </Text>
-      </TouchableOpacity>
+          <Text
+            style={{
+              fontWeight: 600,
+              fontSize: 15,
+              textAlign: "center",
+            }}
+          >
+            Back
+          </Text>
+        </TouchableOpacity>
       </View>
     </View>
   );

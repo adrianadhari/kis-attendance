@@ -9,7 +9,7 @@ const Scan = ({ navigation }) => {
 
   const handleBarCodeScanned = ({ data }) => {
     setScanned(true);
-    navigation.navigate("Checkin");
+    navigation.navigate("Checkin", { setScanned });
   };
   useEffect(() => {
     (async () => {
@@ -17,6 +17,14 @@ const Scan = ({ navigation }) => {
       setHasPermission(status === "granted");
     })();
   }, []);
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      setScanned(false);
+    });
+
+    return unsubscribe;
+  }, [navigation]);
 
   if (hasPermission === null) {
     return <Text>Mengizinkan akses ke kamera</Text>;
